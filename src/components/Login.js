@@ -18,15 +18,12 @@ const Login = () => {
       </div>
 
       <form className=" w-3/12 absolute p-12 bg-black my-24 mx-auto right-0 left-0 text-white opacity-4 rounded-lg bg-opacity-80">
-        <h1 className="font-bold text-3xl py-4">
-          {isSignInForm ? "Sign In" : "Sign Up"}
-        </h1>
-        {!isSignInForm && (
-          <input
-            type="text"
-            placeholder="Full name"
-            className="p-4 my-2 w-full bg-gray-600"
-          />
+        <h1 className="font-bold text-3xl py-4">{isSignInForm ? "Sign In" : "Sign Up"}</h1>
+        {!isSignInForm && (<input
+          type="text"
+          placeholder="Full name"
+          className="p-4 my-2 w-full bg-gray-600"
+        />
         )}
         <input
           type="text"
@@ -39,12 +36,10 @@ const Login = () => {
           className="p-4 my-2 w-full bg-gray-600"
         />
         <button className="p-3 my-6 bg-red-700 w-full rounded-md cursor-pointer">
-          {isSignInForm ? "Sign In" : "Sign Up"}
+           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
         <p className="py-4 cursor-pointer" onClick={toggleSignInForm}>
-          {isSignInForm
-            ? "New to Netflix? Sign up now."
-            : "Already registered? Sign In now."}
+          {isSignInForm ? "New to Netflix? Sign up now." : "Already registered? Sign In now."}
         </p>
       </form>
     </div>
