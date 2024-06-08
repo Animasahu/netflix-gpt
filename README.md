@@ -6,6 +6,11 @@
 - Login Form
 - Sign up Form
 - Form Validation
+- useRef Hook
+- Firebase Setup
+- Deploying our app to productio
+- Create sign up user account in firebase
+
 
 
 
@@ -24,6 +29,8 @@
    - Search Bar
    - Movie Suggestions 
 
-
-   # How do you do validation inside a form - formik library
-   # useRef is used to refernce a field over here, so basically tag over here suppose input tag , a button these gives us reference to it.
+<!-- 
+   How do you do validation inside a form - formik library
+   useRef is used to refernce a field over here, so basically tag over here suppose input tag , a button these gives us reference to it.
+   For authetication we need backend , for bacnkend using google firebase
+ -->

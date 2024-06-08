@@ -1,25 +1,57 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword} from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [isSignInForm, setSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const name = useRef(null);
+  // const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
 
   const handleButtonClick = () => {
     //validate the form data
-
     // console.log(email.current.value);
     // console.log(password.current.value);
 
-    const message  = checkValidData(name.current.value , email.current.value , password.current.value);
+    const message = checkValidData(email?.current?.value, password?.current?.value);
     setErrorMessage(message);
+    if (message) return;
 
-    //sign / sign up
+    if (!isSignInForm) {
+      //Sign up logic
+      createUserWithEmailAndPassword(
+        auth,
+        email?.current?.value,
+        password?.current?.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "_" + errorMessage);
+        });
+
+    } else {
+      //sign in logic
+      signInWithEmailAndPassword(auth, email?.current?.value, password?.current?.value )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "_" + errorMessage);
+
+        });
+    }
   };
 
   const toggleSignInForm = () => {
@@ -39,12 +71,10 @@ const Login = () => {
         onSubmit={(e) => e.preventDefault()}
         className=" w-3/12 absolute p-12 bg-black my-24 mx-auto right-0 left-0 text-white opacity-4 rounded-lg bg-opacity-70"
       >
-        <h1 className="font-bold text-3xl py-4">
-          {isSignInForm ? "Sign In" : "Sign Up"}
-        </h1>
+        <h1 className="font-bold text-3xl py-4"> {isSignInForm ? "Sign In" : "Sign Up"} </h1>
         {!isSignInForm && (
           <input
-            ref = {name}
+            // ref ={name}
             type="text"
             placeholder="Full name"
             className="p-4 my-2 w-full bg-gray-600"
@@ -58,11 +88,12 @@ const Login = () => {
         />
         <input
           ref={password}
-          type="text"
+          type="password"
           placeholder="Password"
           className="p-4 my-2 w-full bg-gray-600"
         />
         <p className="text-red-500 font-bold"> {errorMessage} </p>
+
         <button
           className="p-3 my-6 bg-red-700 w-full rounded-md cursor-pointer"
           onClick={handleButtonClick}
