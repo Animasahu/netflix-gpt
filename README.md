@@ -15,8 +15,10 @@
 - Implemented Sign Out
 - Update Profile
 - Fatch from TMDB movie
-
-
+- BugFix: Sign Up user displayName and profile pictre update
+- BugFix: if the user is not logged in Redirect /browse to Login Page and Vice-versa
+- Unsubcribed to the onAuthStateChanged Callback
+- Add hardcoded values to the constants file
 
 
 # Features
